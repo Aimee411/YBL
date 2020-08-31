@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybl.dao.ResumeMapper">
+  <resultMap id="BaseResultMap" type="com.ybl.entity.Resume">
+    <id column="rid" jdbcType="INTEGER" property="rid" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="rname" jdbcType="VARCHAR" property="rname" />
+    <result column="rsex" jdbcType="VARCHAR" property="rsex" />
+    <result column="rxueli" jdbcType="VARCHAR" property="rxueli" />
+    <result column="rtel" jdbcType="VARCHAR" property="rtel" />
+    <result column="remail" jdbcType="VARCHAR" property="remail" />
+    <result column="raddress" jdbcType="VARCHAR" property="raddress" />
+    <result column="rpolsta" jdbcType="VARCHAR" property="rpolsta" />
+    <result column="reduexp" jdbcType="VARCHAR" property="reduexp" />
+    <result column="rperskills" jdbcType="VARCHAR" property="rperskills" />
+    <result column="others" jdbcType="VARCHAR" property="others" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rid, userid, rname, rsex, rxueli, rtel, remail, raddress, rpolsta, reduexp, rperskills, 
+    others
+  </sql>
+
+  <select id="findAllResume"  resultMap="BaseResultMap">
+    select *
+    from resume
+  </select>
+
+  <select id="findMyAllResume" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *
+    from resume
+    where userid=#{userid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from resume
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from resume
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ybl.entity.Resume">
+    insert into resume (rid, userid, rname, 
+      rsex, rxueli, rtel, 
+      remail, raddress, rpolsta, 
+      reduexp, rperskills, others
+      )
+    values (#{rid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{rname,jdbcType=VARCHAR}, 
+      #{rsex,jdbcType=VARCHAR}, #{rxueli,jdbcType=VARCHAR}, #{rtel,jdbcType=VARCHAR}, 
+      #{remail,jdbcType=VARCHAR}, #{raddress,jdbcType=VARCHAR}, #{rpolsta,jdbcType=VARCHAR}, 
+      #{reduexp,jdbcType=VARCHAR}, #{rperskills,jdbcType=VARCHAR}, #{others,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybl.entity.Resume">
+    insert into resume
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="rname != null">
+        rname,
+      </if>
+      <if test="rsex != null">
+        rsex,
+      </if>
+      <if test="rxueli != null">
+        rxueli,
+      </if>
+      <if test="rtel != null">
+        rtel,
+      </if>
+      <if test="remail != null">
+        remail,
+      </if>
+      <if test="raddress != null">
+        raddress,
+      </if>
+      <if test="rpolsta != null">
+        rpolsta,
+      </if>
+      <if test="reduexp != null">
+        reduexp,
+      </if>
+      <if test="rperskills != null">
+        rperskills,
+      </if>
+      <if test="others != null">
+        others,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="rname != null">
+        #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="rsex != null">
+        #{rsex,jdbcType=VARCHAR},
+      </if>
+      <if test="rxueli != null">
+        #{rxueli,jdbcType=VARCHAR},
+      </if>
+      <if test="rtel != null">
+        #{rtel,jdbcType=VARCHAR},
+      </if>
+      <if test="remail != null">
+        #{remail,jdbcType=VARCHAR},
+      </if>
+      <if test="raddress != null">
+        #{raddress,jdbcType=VARCHAR},
+      </if>
+      <if test="rpolsta != null">
+        #{rpolsta,jdbcType=VARCHAR},
+      </if>
+      <if test="reduexp != null">
+        #{reduexp,jdbcType=VARCHAR},
+      </if>
+      <if test="rperskills != null">
+        #{rperskills,jdbcType=VARCHAR},
+      </if>
+      <if test="others != null">
+        #{others,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybl.entity.Resume">
+    update resume
+    <set>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="rname != null">
+        rname = #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="rsex != null">
+        rsex = #{rsex,jdbcType=VARCHAR},
+      </if>
+      <if test="rxueli != null">
+        rxueli = #{rxueli,jdbcType=VARCHAR},
+      </if>
+      <if test="rtel != null">
+        rtel = #{rtel,jdbcType=VARCHAR},
+      </if>
+      <if test="remail != null">
+        remail = #{remail,jdbcType=VARCHAR},
+      </if>
+      <if test="raddress != null">
+        raddress = #{raddress,jdbcType=VARCHAR},
+      </if>
+      <if test="rpolsta != null">
+        rpolsta = #{rpolsta,jdbcType=VARCHAR},
+      </if>
+      <if test="reduexp != null">
+        reduexp = #{reduexp,jdbcType=VARCHAR},
+      </if>
+      <if test="rperskills != null">
+        rperskills = #{rperskills,jdbcType=VARCHAR},
+      </if>
+      <if test="others != null">
+        others = #{others,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybl.entity.Resume">
+    update resume
+    set userid = #{userid,jdbcType=INTEGER},
+      rname = #{rname,jdbcType=VARCHAR},
+      rsex = #{rsex,jdbcType=VARCHAR},
+      rxueli = #{rxueli,jdbcType=VARCHAR},
+      rtel = #{rtel,jdbcType=VARCHAR},
+      remail = #{remail,jdbcType=VARCHAR},
+      raddress = #{raddress,jdbcType=VARCHAR},
+      rpolsta = #{rpolsta,jdbcType=VARCHAR},
+      reduexp = #{reduexp,jdbcType=VARCHAR},
+      rperskills = #{rperskills,jdbcType=VARCHAR},
+      others = #{others,jdbcType=VARCHAR}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+</mapper>

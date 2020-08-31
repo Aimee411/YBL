@@ -1,0 +1,41 @@
+body {
+    padding-top: 50px;
+}
+
+.navbar .logo {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAAvCAMAAABuQAddAAAAM1BMV…RBej0INatOhS00GmRmNNvtX9Ef7pJbeQ03C1WdYQyH/gANecAMKFz2RgAAAABJRU5ErkJggg==) center center/150px 25px no-repeat;
+    -moz-background-size: 150px 25px;
+    -o-background-size: 150px 25px;
+    -webkit-background-size: 150px 25px;
+    width: 180px;
+    display: block;
+}
+
+.navbar-right {
+    margin-right: 20px;
+}
+
+.navbar .navbar-nav .nav-bold {
+    font-weight: 700;
+}
+
+.rega-home-banner {
+    background-color: #0A0A0A;
+    color: #fff;
+    padding: 30px;
+}
+
+.btn-white {
+    background: #fff !important;
+    color: #0A0A0A;
+    margin-top: 10px;
+    width: 220px;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}

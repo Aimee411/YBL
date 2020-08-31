@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybl.dao.Admin_CompanyMapper">
+  <resultMap id="BaseResultMap" type="com.ybl.entity.Admin_Company">
+    <id column="adminid" jdbcType="INTEGER" property="adminid" />
+    <id column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="audit_company" jdbcType="INTEGER" property="auditCompany" />
+    <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    adminid, company_id, audit_company, audit_time
+  </sql>
+
+  <select id="findAllNoAudit"  resultMap="BaseResultMap">
+    select *
+    from admin_company
+    where audit_company=0
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="com.ybl.entity.Admin_CompanyKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin_company
+    where adminid = #{adminid,jdbcType=INTEGER}
+      and company_id = #{companyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ybl.entity.Admin_CompanyKey">
+    delete from admin_company
+    where adminid = #{adminid,jdbcType=INTEGER}
+      and company_id = #{companyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ybl.entity.Admin_Company">
+    insert into admin_company (adminid, company_id, audit_company, 
+      audit_time)
+    values (#{adminid,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{auditCompany,jdbcType=INTEGER}, 
+      #{auditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybl.entity.Admin_Company">
+    insert into admin_company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="adminid != null">
+        adminid,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="auditCompany != null">
+        audit_company,
+      </if>
+      <if test="auditTime != null">
+        audit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="adminid != null">
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="auditCompany != null">
+        #{auditCompany,jdbcType=INTEGER},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybl.entity.Admin_Company">
+    update admin_company
+    <set>
+      <if test="auditCompany != null">
+        audit_company = #{auditCompany,jdbcType=INTEGER},
+      </if>
+      <if test="auditTime != null">
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where adminid = #{adminid,jdbcType=INTEGER}
+      and company_id = #{companyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybl.entity.Admin_Company">
+    update admin_company
+    set audit_company = #{auditCompany,jdbcType=INTEGER},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP}
+    where adminid = #{adminid,jdbcType=INTEGER}
+      and company_id = #{companyId,jdbcType=INTEGER}
+  </update>
+</mapper>

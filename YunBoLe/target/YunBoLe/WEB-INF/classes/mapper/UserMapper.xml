@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybl.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.ybl.entity.User">
+    <id column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="userpwd" jdbcType="VARCHAR" property="userpwd" />
+    <result column="userxueli" jdbcType="VARCHAR" property="userxueli" />
+    <result column="usertel" jdbcType="VARCHAR" property="usertel" />
+    <result column="useremail" jdbcType="VARCHAR" property="useremail" />
+    <result column="userage" jdbcType="INTEGER" property="userage" />
+    <result column="politicsStatus" jdbcType="VARCHAR" property="politicsstatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    userid, username, userpwd, userxueli, usertel, useremail, userage, politicsStatus
+  </sql>
+
+  <select id="findAllUser" resultMap="BaseResultMap">
+    select *
+    from user
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where userid = #{userid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.ybl.entity.User">
+    insert into user (userid, username, userpwd, 
+      userxueli, usertel, useremail, 
+      userage, politicsStatus)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpwd,jdbcType=VARCHAR}, 
+      #{userxueli,jdbcType=VARCHAR}, #{usertel,jdbcType=VARCHAR}, #{useremail,jdbcType=VARCHAR}, 
+      #{userage,jdbcType=INTEGER}, #{politicsstatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybl.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="userpwd != null">
+        userpwd,
+      </if>
+      <if test="userxueli != null">
+        userxueli,
+      </if>
+      <if test="usertel != null">
+        usertel,
+      </if>
+      <if test="useremail != null">
+        useremail,
+      </if>
+      <if test="userage != null">
+        userage,
+      </if>
+      <if test="politicsstatus != null">
+        politicsStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpwd != null">
+        #{userpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userxueli != null">
+        #{userxueli,jdbcType=VARCHAR},
+      </if>
+      <if test="usertel != null">
+        #{usertel,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null">
+        #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="userage != null">
+        #{userage,jdbcType=INTEGER},
+      </if>
+      <if test="politicsstatus != null">
+        #{politicsstatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybl.entity.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpwd != null">
+        userpwd = #{userpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userxueli != null">
+        userxueli = #{userxueli,jdbcType=VARCHAR},
+      </if>
+      <if test="usertel != null">
+        usertel = #{usertel,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null">
+        useremail = #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="userage != null">
+        userage = #{userage,jdbcType=INTEGER},
+      </if>
+      <if test="politicsstatus != null">
+        politicsStatus = #{politicsstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybl.entity.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      userpwd = #{userpwd,jdbcType=VARCHAR},
+      userxueli = #{userxueli,jdbcType=VARCHAR},
+      usertel = #{usertel,jdbcType=VARCHAR},
+      useremail = #{useremail,jdbcType=VARCHAR},
+      userage = #{userage,jdbcType=INTEGER},
+      politicsStatus = #{politicsstatus,jdbcType=VARCHAR}
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>

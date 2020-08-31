@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybl.dao.User_EmploymentMapper">
+  <resultMap id="BaseResultMap" type="com.ybl.entity.User_Employment">
+    <id column="userid" jdbcType="INTEGER" property="userid" />
+    <id column="empid" jdbcType="INTEGER" property="empid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    userid, empid
+  </sql>
+
+  <select id="findAllUserCollEmp" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *
+    from user_employment
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="com.ybl.entity.User_EmploymentKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_employment
+    where userid = #{userid,jdbcType=INTEGER}
+      and empid = #{empid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ybl.entity.User_EmploymentKey">
+    delete from user_employment
+    where userid = #{userid,jdbcType=INTEGER}
+      and empid = #{empid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ybl.entity.User_Employment">
+    insert into user_employment (userid, empid
+      )
+    values (#{userid,jdbcType=INTEGER}, #{empid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybl.entity.User_Employment">
+    insert into user_employment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="empid != null">
+        empid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

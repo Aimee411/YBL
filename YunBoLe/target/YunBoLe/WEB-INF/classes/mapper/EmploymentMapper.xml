@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybl.dao.EmploymentMapper">
+  <resultMap id="BaseResultMap" type="com.ybl.entity.Employment">
+    <id column="empid" jdbcType="INTEGER" property="empid" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="empask" jdbcType="VARCHAR" property="empask" />
+    <result column="empjob" jdbcType="VARCHAR" property="empjob" />
+    <result column="empxueli" jdbcType="VARCHAR" property="empxueli" />
+    <result column="empaddress" jdbcType="VARCHAR" property="empaddress" />
+    <result column="emppay" jdbcType="VARCHAR" property="emppay" />
+    <result column="empduty" jdbcType="VARCHAR" property="empduty" />
+    <result column="isfulltime" jdbcType="INTEGER" property="isfulltime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    empid, company_id, empask, empjob, empxueli, empaddress, emppay, empduty, isfulltime
+  </sql>
+
+  <select id="selectAllemp" resultMap="BaseResultMap">
+    select *
+    from employment
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employment
+    where empid = #{empid,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employment
+    where empid = #{empid,jdbcType=INTEGER}
+  </delete>
+
+  <!--<insert id="insert" parameterType="com.ybl.entity.Employment">
+    insert into employment (empid, company_id, empask, 
+      empjob, empxueli, empaddress, 
+      emppay, empduty, isfulltime
+      )
+    values (#{empid,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{empask,jdbcType=VARCHAR}, 
+      #{empjob,jdbcType=VARCHAR}, #{empxueli,jdbcType=VARCHAR}, #{empaddress,jdbcType=VARCHAR}, 
+      #{emppay,jdbcType=VARCHAR}, #{empduty,jdbcType=VARCHAR}, #{isfulltime,jdbcType=INTEGER}
+      )
+  </insert>-->
+
+  <insert id="insertSelective" parameterType="com.ybl.entity.Employment">
+    insert into employment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empid != null">
+        empid,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="empask != null">
+        empask,
+      </if>
+      <if test="empjob != null">
+        empjob,
+      </if>
+      <if test="empxueli != null">
+        empxueli,
+      </if>
+      <if test="empaddress != null">
+        empaddress,
+      </if>
+      <if test="emppay != null">
+        emppay,
+      </if>
+      <if test="empduty != null">
+        empduty,
+      </if>
+      <if test="isfulltime != null">
+        isfulltime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="empask != null">
+        #{empask,jdbcType=VARCHAR},
+      </if>
+      <if test="empjob != null">
+        #{empjob,jdbcType=VARCHAR},
+      </if>
+      <if test="empxueli != null">
+        #{empxueli,jdbcType=VARCHAR},
+      </if>
+      <if test="empaddress != null">
+        #{empaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="emppay != null">
+        #{emppay,jdbcType=VARCHAR},
+      </if>
+      <if test="empduty != null">
+        #{empduty,jdbcType=VARCHAR},
+      </if>
+      <if test="isfulltime != null">
+        #{isfulltime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybl.entity.Employment">
+    update employment
+    <set>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="empask != null">
+        empask = #{empask,jdbcType=VARCHAR},
+      </if>
+      <if test="empjob != null">
+        empjob = #{empjob,jdbcType=VARCHAR},
+      </if>
+      <if test="empxueli != null">
+        empxueli = #{empxueli,jdbcType=VARCHAR},
+      </if>
+      <if test="empaddress != null">
+        empaddress = #{empaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="emppay != null">
+        emppay = #{emppay,jdbcType=VARCHAR},
+      </if>
+      <if test="empduty != null">
+        empduty = #{empduty,jdbcType=VARCHAR},
+      </if>
+      <if test="isfulltime != null">
+        isfulltime = #{isfulltime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where empid = #{empid,jdbcType=INTEGER}
+  </update>
+ <!-- <update id="updateByPrimaryKey" parameterType="com.ybl.entity.Employment">
+    update employment
+    set company_id = #{companyId,jdbcType=INTEGER},
+      empask = #{empask,jdbcType=VARCHAR},
+      empjob = #{empjob,jdbcType=VARCHAR},
+      empxueli = #{empxueli,jdbcType=VARCHAR},
+      empaddress = #{empaddress,jdbcType=VARCHAR},
+      emppay = #{emppay,jdbcType=VARCHAR},
+      empduty = #{empduty,jdbcType=VARCHAR},
+      isfulltime = #{isfulltime,jdbcType=INTEGER}
+    where empid = #{empid,jdbcType=INTEGER}
+  </update>-->
+</mapper>

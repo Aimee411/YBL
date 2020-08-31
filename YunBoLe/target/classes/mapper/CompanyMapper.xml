@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybl.dao.CompanyMapper">
+  <resultMap id="BaseResultMap" type="com.ybl.entity.Company">
+    <id column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="company_pwd" jdbcType="VARCHAR" property="companyPwd" />
+    <result column="creation_time" jdbcType="DATE" property="creationTime" />
+    <result column="company_tel" jdbcType="VARCHAR" property="companyTel" />
+    <result column="company_address" jdbcType="VARCHAR" property="companyAddress" />
+    <result column="company_mail" jdbcType="VARCHAR" property="companyMail" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="corporate_welfare" jdbcType="VARCHAR" property="corporateWelfare" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="staffnumber" jdbcType="VARCHAR" property="staffnumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    company_id, company_pwd, creation_time, company_tel, company_address, company_mail, 
+    company_name, corporate_welfare, description, staffnumber
+  </sql>
+
+  <select id="findAllCompany"  resultMap="BaseResultMap">
+    select *
+    from company
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from company
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from company
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.ybl.entity.Company">
+    insert into company (company_id, company_pwd, creation_time, 
+      company_tel, company_address, company_mail, 
+      company_name, corporate_welfare, description, 
+      staffnumber)
+    values (#{companyId,jdbcType=INTEGER}, #{companyPwd,jdbcType=VARCHAR}, #{creationTime,jdbcType=DATE}, 
+      #{companyTel,jdbcType=VARCHAR}, #{companyAddress,jdbcType=VARCHAR}, #{companyMail,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{corporateWelfare,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{staffnumber,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybl.entity.Company">
+    update company
+    <set>
+      <if test="companyPwd != null">
+        company_pwd = #{companyPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null">
+        creation_time = #{creationTime,jdbcType=DATE},
+      </if>
+      <if test="companyTel != null">
+        company_tel = #{companyTel,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null">
+        company_address = #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMail != null">
+        company_mail = #{companyMail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="corporateWelfare != null">
+        corporate_welfare = #{corporateWelfare,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="staffnumber != null">
+        staffnumber = #{staffnumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </update>
+
+</mapper>

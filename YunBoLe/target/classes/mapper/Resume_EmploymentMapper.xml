@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybl.dao.Resume_EmploymentMapper">
+  <resultMap id="BaseResultMap" type="com.ybl.entity.Resume_Employment">
+    <id column="rid" jdbcType="INTEGER" property="rid" />
+    <id column="empid" jdbcType="INTEGER" property="empid" />
+    <result column="resume_status" jdbcType="VARCHAR" property="resumeStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rid, empid, resume_status
+  </sql>
+
+  <select id="findAllReEmp" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *
+    from resume_employment
+    where empid = #{empid,jdbcType=INTEGER}
+  </select>
+
+
+  <select id="findDeliResByRid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *
+    from resume_employment
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="com.ybl.entity.Resume_EmploymentKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from resume_employment
+    where rid = #{rid,jdbcType=INTEGER}
+      and empid = #{empid,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="com.ybl.entity.Resume_EmploymentKey">
+    delete from resume_employment
+    where rid = #{rid,jdbcType=INTEGER}
+      and empid = #{empid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="deliverResume" parameterType="com.ybl.entity.Resume_Employment">
+    insert into  resume_employment (rid,
+     empid, resume_status)
+    values (#{rid,jdbcType=INTEGER}, #{empid,jdbcType=INTEGER}, #{resume_status,jdbcType=VARCHAR})
+  </insert>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.ybl.entity.Resume_Employment">
+    update resume_employment
+    set resume_status = #{resumeStatus,jdbcType=VARCHAR}
+    where rid = #{rid,jdbcType=INTEGER}
+      and empid = #{empid,jdbcType=INTEGER}
+  </update>
+</mapper>
